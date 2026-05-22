@@ -117,4 +117,4 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-AUTH_USER_MODEL = "equipment_information_for_users.User"
+AUTH_USER_MODEL = "equipment_information.User"
