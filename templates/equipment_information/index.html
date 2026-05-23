@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Equipment information</h1>
+
+  <ul>
+    <li>Manufacturers: {{ num_manufacturers }}</li>
+    <li>Equipments: {{ num_equipments }}</li>
+    <li>Commentary: {{ num_comments }}</li>
+  </ul>
+  <p>
+    You have visited this page {{ count_visits }} time{{ count_visits|pluralize }}
+  </p>
+  <h3>
+  Temporary link
+  <ul>
+    <li><a href="{% url "equipment_information:manufacturer_list" %}">
+      Manufacturer list
+    </a></li>
+  </ul>
+  </h3>
+{% endblock %}
