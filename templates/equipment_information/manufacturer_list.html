@@ -2,7 +2,8 @@
 
 {% block content %}
 	<h1>Manufacturer list
-    <a href="#">Need create manf_create</a>
+    <p><a href="{% url "equipment_information:manufacturer-create" %}">Create</a></p>
+
   </h1>
 
   {% if manufacturer_list %}
@@ -25,10 +26,10 @@
           <td>{{ manufacturer.name }}</td>
           <td>{{ manufacturer.country }}</td>
           <td>
-            <a href="#">Need add update</a>
+            <a href="{% url "equipment_information:manufacturer-update" pk=manufacturer.id %}">Update</a>
           </td>
           <td>
-            <a href="#">Need add delete</a>
+            <a href="{% url "equipment_information:manufacturer-delete" pk=manufacturer.id %}">Delete</a>
           </td>
         </tr>
       {% endfor %}
