@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Equipment category list
+    <p><a href="{% url "equipment_information:equipments-category-create" %}">Create</a></p>
+
+  </h1>
+
+  {% if equipment_category_list %}
+    <form action="" method="get">
+      {{ search_form }}
+      <input type="submit" value="🔍️">
+    </form>
+
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+      {% for equipment_category in equipment_category_list %}
+        <tr>
+          <td>{{ equipment_category.id }}</td>
+          <td>{{ equipment_category.name }}</td>
+          <td>
+            <a href="{% url "equipment_information:equipments-category-update" pk=equipment_category.id %}">Update</a>
+          </td>
+          <td>
+            <a href="{% url "equipment_information:equipments-category-delete" pk=equipment_category.id %}">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    <h4>There are no equipment category in the service.</h4>
+  {% endif %}
+
+{% endblock %}

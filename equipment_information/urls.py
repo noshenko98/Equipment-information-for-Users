@@ -18,18 +18,26 @@ Including another URLconf
 from django.urls import path
 
 
-from equipment_information.views import index,ManufacturerListView, ManufacturerCreateView, ManufacturerUpdateView,ManufacturerDeleteView
+from equipment_information.views import index,ManufacturerListView, ManufacturerCreateView, ManufacturerUpdateView, ManufacturerDeleteView, EquipmentCategoryListView, EquipmentCategoryCreateView, EquipmentCategoryUpdateView, EquipmentCategoryDeleteView
 
 urlpatterns = [
     path("", index, name="index"),
     path("manufacturers/", ManufacturerListView.as_view(),
          name="manufacturer-list"),
-    path("manufacturers/create",ManufacturerCreateView.as_view(),
+    path("manufacturers/create/",ManufacturerCreateView.as_view(),
          name="manufacturer-create"),
     path("manufacturers/<int:pk>/update/", ManufacturerUpdateView.as_view(),
          name="manufacturer-update"),
     path("manufacturers/<int:pk>/delete/", ManufacturerDeleteView.as_view(),
          name="manufacturer-delete"),
+    path("equipments-category/", EquipmentCategoryListView.as_view(),
+         name="equipments-category-list"),
+    path("equipments-category/create/", EquipmentCategoryCreateView.as_view(),
+         name="equipments-category-create"),
+    path("equipments-category/<int:pk>/update/", EquipmentCategoryUpdateView.as_view(),
+         name="equipments-category-update"),
+    path("equipments-category/<int:pk>/delete/", EquipmentCategoryDeleteView.as_view(),
+         name="equipments-category-delete"),
 ]
 
 app_name = "equipment_information"

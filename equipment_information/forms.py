@@ -10,3 +10,14 @@ class ManufacturerSearchForm(forms.Form):
             "placeholder": "Search by name",
         })
     )
+
+
+class EquipmentCategorySearchForm(forms.Form):
+    name = forms.CharField(
+        max_length=100,
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={
+            "placeholder": "Search by name",
+        })
+    )

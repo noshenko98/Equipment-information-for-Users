@@ -6,8 +6,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from equipment_information.forms import ManufacturerSearchForm
-from equipment_information.models import Manufacturer, Equipment, Commentary
+from equipment_information.forms import ManufacturerSearchForm, EquipmentCategorySearchForm
+from equipment_information.models import Manufacturer, Equipment, Commentary, EquipmentCategory
 
 
 @login_required
@@ -29,9 +29,9 @@ def index(request):
 
 
 class ManufacturerListView(LoginRequiredMixin, generic.ListView):
-    model=Manufacturer
-    context_object_name="manufacturer_list"
-    template_name="equipment_information/manufacturer_list.html"
+    model = Manufacturer
+    context_object_name = "manufacturer_list"
+    template_name = "equipment_information/manufacturer_list.html"
     paginate_by=5
 
     def get_queryset(self):
@@ -65,3 +65,45 @@ class ManufacturerUpdateView(LoginRequiredMixin, generic.UpdateView):
 class ManufacturerDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Manufacturer
     success_url = reverse_lazy("equipment_information:manufacturer-list")
+
+
+class EquipmentCategoryListView(LoginRequiredMixin, generic.ListView):
+    model = EquipmentCategory
+    context_object_name = "equipment_category_list"
+    template_name = "equipment_information/equipment_category_list.html"
+    paginate_by = 2
+
+    def get_queryset(self):
+        queryset = EquipmentCategory.objects.all()
+        search_name = self.request.GET.get("name")
+        if search_name:
+            return queryset.filter(name__icontains=search_name)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(EquipmentCategoryListView, self).get_context_data(**kwargs)
+        name = self.request.GET.get("name", "")
+        context["search_form"] = EquipmentCategorySearchForm(
+            initial={"name": name}
+        )
+        return context
+
+
+class EquipmentCategoryCreateView(LoginRequiredMixin, generic.CreateView):
+    model = EquipmentCategory
+    fields = "__all__"
+    success_url = reverse_lazy("equipment_information:equipments-category-list")
+    template_name = "equipment_information/equipment_category_form.html"
+
+
+class EquipmentCategoryUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = EquipmentCategory
+    fields = "__all__"
+    success_url = reverse_lazy("equipment_information:equipments-category-list")
+    template_name = "equipment_information/equipment_category_form.html"
+
+
+class EquipmentCategoryDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = EquipmentCategory
+    success_url = reverse_lazy("equipment_information:equipments-category-list")
+    template_name = "equipment_information/equipment_category_confirm_delete.html"
