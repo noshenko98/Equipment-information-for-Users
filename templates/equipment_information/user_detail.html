@@ -5,7 +5,8 @@
   <h3>{{ user.first_name }} {{ user.last_name }}</h3>
   <ul>
   {% for equipment in user.favorite_equipment.all %}
-    <li>{{ equipment }}
+    <li>
+      {{ equipment }}
       {% if user.id == request.user.id %}
       <a href="{% url "equipment_information:remove-favorites" pk_user=user.id pk_equipment=equipment.id %}">⭐</a></li>
       {% endif %}

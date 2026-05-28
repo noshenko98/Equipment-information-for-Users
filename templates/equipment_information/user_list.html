@@ -2,14 +2,13 @@
 
 {% block content %}
 	<h1>User list
-    <p><a href="#">Need add Create</a></p>
-
+    <p><a href="{% url "equipment_information:user-create" %}">Create</a></p>
   </h1>
 
   {% if user_list %}
-    <form action="" method="get" class="form-inline">
+    <form action="" method="get">
       {{ search_form }}
-      <input type="submit" class="btn btn-primary" value="🔍️">
+      <input type="submit" value="🔍️">
     </form>
 
     <table>
@@ -26,10 +25,14 @@
           <td>{{ user.username }}</td>
           <td>{{ user.first_name }} {{ user.last_name }}</td>
           <td>
-            <a href="#">need add Update</a>
+            {% if user.id == request.user.id or request.user.is_superuser %}
+            <a href="{% url "equipment_information:user-update" pk=user.id %}">Update</a>
+            {% endif %}
           </td>
           <td>
-            <a href="#">need add Delete</a>
+            {% if user.id == request.user.id or request.user.is_superuser %}
+            <a href="{% url "equipment_information:user-delete" pk=user.id %}">Delete</a>
+            {% endif %}
           </td>
         </tr>
       {% endfor %}

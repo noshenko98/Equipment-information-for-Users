@@ -28,7 +28,10 @@ from equipment_information.views import (index,ManufacturerListView,
                                          EquipmentCategoryDeleteView,
                                          UserListView,
                                          UserDetailView,
-                                         remove_from_favorites)
+                                         remove_from_favorites,
+                                         UserCreateView,
+                                         UserUpdate,
+                                         UserDeleteView)
 
 urlpatterns = [
     path("", index, name="index"),
@@ -54,6 +57,12 @@ urlpatterns = [
          name="user-detail"),
     path("users/<int:pk_user>/remove-favorites/<int:pk_equipment>", remove_from_favorites,
         name="remove-favorites"),
+    path("users/create/", UserCreateView.as_view(),
+         name="user-create"),
+    path("users/<int:pk>/update/", UserUpdate.as_view(),
+         name="user-update"),
+    path("users/<int:pk>/delete/", UserDeleteView.as_view(),
+         name="user-delete"),
 
 ]
 

@@ -1,14 +1,22 @@
-from tokenize import Comment
-
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from equipment_information.forms import ManufacturerSearchForm, EquipmentCategorySearchForm, UserUsernameSearchForm
-from equipment_information.models import Manufacturer, Equipment, Commentary, EquipmentCategory, User
+from equipment_information.forms import (ManufacturerSearchForm,
+                                         EquipmentCategorySearchForm,
+                                         UserUsernameSearchForm,
+                                         UserCreateForm,
+                                         UserUpdateForm)
+from equipment_information.models import (Manufacturer,
+                                          Equipment,
+                                          Commentary,
+                                          EquipmentCategory,
+                                          User)
 
 
 @login_required
@@ -139,3 +147,28 @@ def remove_from_favorites(request, pk_user, pk_equipment):
         equipment = Equipment.objects.get(pk=pk_equipment)
         request.user.favorite_equipment.remove(equipment)
     return HttpResponseRedirect(reverse_lazy("equipment_information:user-detail", args=[pk_user]))
+
+
+class UserCreateView(LoginRequiredMixin, generic.CreateView):
+    model = get_user_model()
+    form_class = UserCreateForm
+    success_url = reverse_lazy("equipment_information:user-list")
+
+
+class UserUpdate(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+    model = User
+    form_class = UserUpdateForm
+    success_url = reverse_lazy("equipment_information:user-list")
+
+    def test_func(self):
+        user = self.get_object()
+        return self.request.user == user or self.request.user.is_superuser
+
+
+class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+    model = User
+    success_url = reverse_lazy("equipment_information:user-list")
+
+    def test_func(self):
+        user = self.get_object()
+        return self.request.user == user or self.request.user.is_superuser
