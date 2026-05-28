@@ -21,3 +21,15 @@ class EquipmentCategorySearchForm(forms.Form):
             "placeholder": "Search by name",
         })
     )
+
+
+class UserUsernameSearchForm(forms.Form):
+    username = forms.CharField(max_length=150,
+                               required=False,
+                               label="",
+                               widget=forms.TextInput(
+                                   attrs={
+                                       "placeholder":
+                                           "Search by Username"}
+                               )
+                               )

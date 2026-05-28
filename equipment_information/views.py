@@ -2,12 +2,13 @@ from tokenize import Comment
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from equipment_information.forms import ManufacturerSearchForm, EquipmentCategorySearchForm
-from equipment_information.models import Manufacturer, Equipment, Commentary, EquipmentCategory
+from equipment_information.forms import ManufacturerSearchForm, EquipmentCategorySearchForm, UserUsernameSearchForm
+from equipment_information.models import Manufacturer, Equipment, Commentary, EquipmentCategory, User
 
 
 @login_required
@@ -107,3 +108,34 @@ class EquipmentCategoryDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = EquipmentCategory
     success_url = reverse_lazy("equipment_information:equipments-category-list")
     template_name = "equipment_information/equipment_category_confirm_delete.html"
+
+
+class UserListView(LoginRequiredMixin, generic.ListView):
+    model = User
+    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        context = super(UserListView, self).get_context_data(**kwargs)
+        username = self.request.GET.get("username", "")
+        context["search_form"] = UserUsernameSearchForm(
+            initial={"username": username}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = User.objects.all()
+        username = self.request.GET.get("username")
+        if username:
+            return queryset.filter(username__icontains=username)
+        return queryset
+
+
+class UserDetailView(LoginRequiredMixin, generic.DetailView):
+    model = User
+
+@login_required
+def remove_from_favorites(request, pk_user, pk_equipment):
+    if request.user.id == pk_user:
+        equipment = Equipment.objects.get(pk=pk_equipment)
+        request.user.favorite_equipment.remove(equipment)
+    return HttpResponseRedirect(reverse_lazy("equipment_information:user-detail", args=[pk_user]))

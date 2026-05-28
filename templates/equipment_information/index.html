@@ -17,8 +17,15 @@
     <li><a href="{% url "equipment_information:manufacturer-list" %}">
       Manufacturer list
     </a></li>
-    <li><a href="{% url "equipment_information:equipments-category-list" %}">Equipment category</a>
-    </li>
+    <li><a href="{% url "equipment_information:equipments-category-list" %}">
+      Equipment category list
+    </a></li>
+    <li><a href="{% url "equipment_information:user-list" %}">
+      User list
+    </a></li>
+    <li><a href="{% url "equipment_information:user-detail" pk=user.id %}">
+      My list of favorites
+    </a></li>
   </ul>
   </h3>
 

@@ -18,7 +18,17 @@ Including another URLconf
 from django.urls import path
 
 
-from equipment_information.views import index,ManufacturerListView, ManufacturerCreateView, ManufacturerUpdateView, ManufacturerDeleteView, EquipmentCategoryListView, EquipmentCategoryCreateView, EquipmentCategoryUpdateView, EquipmentCategoryDeleteView
+from equipment_information.views import (index,ManufacturerListView,
+                                         ManufacturerCreateView,
+                                         ManufacturerUpdateView,
+                                         ManufacturerDeleteView,
+                                         EquipmentCategoryListView,
+                                         EquipmentCategoryCreateView,
+                                         EquipmentCategoryUpdateView,
+                                         EquipmentCategoryDeleteView,
+                                         UserListView,
+                                         UserDetailView,
+                                         remove_from_favorites)
 
 urlpatterns = [
     path("", index, name="index"),
@@ -38,6 +48,13 @@ urlpatterns = [
          name="equipments-category-update"),
     path("equipments-category/<int:pk>/delete/", EquipmentCategoryDeleteView.as_view(),
          name="equipments-category-delete"),
+    path("users/", UserListView.as_view(),
+         name="user-list"),
+    path("users/<int:pk>/", UserDetailView.as_view(),
+         name="user-detail"),
+    path("users/<int:pk_user>/remove-favorites/<int:pk_equipment>", remove_from_favorites,
+        name="remove-favorites"),
+
 ]
 
 app_name = "equipment_information"
