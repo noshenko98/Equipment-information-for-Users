@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 
-from equipment_information.models import User
+
 
 
 class ManufacturerSearchForm(forms.Form):
@@ -54,3 +54,14 @@ class UserUpdateForm(forms.ModelForm):
         widgets = {
             "favorite_equipment": forms.CheckboxSelectMultiple()
         }
+
+
+class EquipmentNameModelSearchForm(forms.Form):
+    search_query = forms.CharField(max_length=150,
+                                   required=False,
+                                   label="",
+                                   widget=forms.TextInput(
+                                       attrs={
+                                           "placeholder":
+                                               "Search by name or model",
+                                       }))

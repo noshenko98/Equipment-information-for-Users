@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -11,7 +12,8 @@ from equipment_information.forms import (ManufacturerSearchForm,
                                          EquipmentCategorySearchForm,
                                          UserUsernameSearchForm,
                                          UserCreateForm,
-                                         UserUpdateForm)
+                                         UserUpdateForm,
+                                         EquipmentNameModelSearchForm)
 from equipment_information.models import (Manufacturer,
                                           Equipment,
                                           Commentary,
@@ -172,3 +174,29 @@ class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView
     def test_func(self):
         user = self.get_object()
         return self.request.user == user or self.request.user.is_superuser
+
+
+class EquipmentListView(LoginRequiredMixin, generic.ListView):
+    model = Equipment
+    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        context = super(
+            EquipmentListView, self).get_context_data(**kwargs)
+        search_query = self.request.GET.get("search_query", "")
+        context["search_form"] = EquipmentNameModelSearchForm(
+            initial={"search_query": search_query}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = Equipment.objects.select_related("manufacturer", "category").all()
+        search_query = self.request.GET.get("search_query")
+        if search_query:
+            return queryset.filter(Q(name__icontains=search_query) | Q(model__icontains=search_query))
+        return queryset
+
+
+class EquipmentDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Equipment
+    queryset = Equipment.objects.all().select_related("manufacturer")

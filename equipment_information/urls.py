@@ -31,7 +31,9 @@ from equipment_information.views import (index,ManufacturerListView,
                                          remove_from_favorites,
                                          UserCreateView,
                                          UserUpdate,
-                                         UserDeleteView)
+                                         UserDeleteView,
+                                         EquipmentListView,
+                                         EquipmentDetailView,)
 
 urlpatterns = [
     path("", index, name="index"),
@@ -63,6 +65,10 @@ urlpatterns = [
          name="user-update"),
     path("users/<int:pk>/delete/", UserDeleteView.as_view(),
          name="user-delete"),
+    path("equipment/", EquipmentListView.as_view(),
+         name="equipment-list"),
+    path("equipment/<int:pk>/", EquipmentDetailView.as_view(),
+         name="equipment-detail"),
 
 ]
 

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Equipment details</h1>
+  <h2>{{ equipment }} </h2>
+  <h3>The price on the marketplace is approximately {{ equipment.price }} UAH</h3>
+  <ul>
+    {% for key, value in equipment.tech_specifications.items %}
+      <li>{{ key }}: {{ value }}</li>
+    {% endfor %}
+  </ul>
+  {% if equipment.comments.all %}
+  	{% for comment in equipment.comments.all %}
+  	<p>{{ comment.user.username }} at {{ comment.created_time }}</p>
+    <p>{{ comment.content }}</p>
+    {% endfor %}
+  {% else %}
+    <p>There are no comments on this equipment </p>
+  {% endif %}
+
+
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Equipment list
+    <p><a href="">Need to add Create</a></p>
+  </h1>
+
+  {% if equipment_list %}
+    <form action="" method="get">
+      {{ search_form }}
+      <input type="submit" value="🔍️">
+    </form>
+
+    {% for equipment in equipment_list %}
+      <h2><a href="{% url "equipment_information:equipment-detail" pk=equipment.id %}">
+        {{ equipment }} {{ equipment.price }}
+      </a></h2>
+      <p>The equipment page was created at {{ equipment.created_time }}</p>
+      <p>{{ equipment.comments.count }} Comment{{ equipment.comments.count|pluralize }}</p>
+    {% endfor %}
+
+    {% else %}
+    <h4>There are no users in the service.</h4>
+  {% endif %}
+
+{% endblock %}

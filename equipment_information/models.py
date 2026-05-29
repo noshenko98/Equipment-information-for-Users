@@ -40,6 +40,8 @@ class Equipment(models.Model):
     category = models.ForeignKey(EquipmentCategory,
                                  on_delete=models.CASCADE,
                                  related_name="equipment")
+    class Meta:
+        ordering = ["-created_time"]
 
     def __str__(self):
         return f"{self.manufacturer} {self.name} ({self.model})"
