@@ -18,7 +18,7 @@ Including another URLconf
 from django.urls import path
 
 
-from equipment_information.views import (index,ManufacturerListView,
+from equipment_information.views import (index, ManufacturerListView,
                                          ManufacturerCreateView,
                                          ManufacturerUpdateView,
                                          ManufacturerDeleteView,
@@ -33,7 +33,8 @@ from equipment_information.views import (index,ManufacturerListView,
                                          UserUpdate,
                                          UserDeleteView,
                                          EquipmentListView,
-                                         EquipmentDetailView,)
+                                         EquipmentDetailView,
+                                         add_to_favorites, )
 
 urlpatterns = [
     path("", index, name="index"),
@@ -69,6 +70,8 @@ urlpatterns = [
          name="equipment-list"),
     path("equipment/<int:pk>/", EquipmentDetailView.as_view(),
          name="equipment-detail"),
+    path("users/add-to-favorites/<int:pk_equipment>", add_to_favorites,
+        name="add-favorites")
 
 ]
 

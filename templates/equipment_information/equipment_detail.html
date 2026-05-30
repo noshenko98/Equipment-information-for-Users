@@ -4,6 +4,15 @@
 	<h1>Equipment details</h1>
   <h2>{{ equipment }} </h2>
   <h3>The price on the marketplace is approximately {{ equipment.price }} UAH</h3>
+  {% if equipment in request.user.favorite_equipment.all %}
+    Remove from favorites
+    <a href="{% url "equipment_information:remove-favorites" pk_equipment=equipment.id pk_user=request.user.id %}?from=equipmen">
+    👉🏻🗑️⭐
+    </a>
+  {% else %}
+    Add to favorites
+    <a href="{% url "equipment_information:add-favorites" pk_equipment=equipment.id %}">⭐</a>
+  {% endif %}
   <ul>
     {% for key, value in equipment.tech_specifications.items %}
       <li>{{ key }}: {{ value }}</li>
@@ -17,7 +26,14 @@
   {% else %}
     <p>There are no comments on this equipment </p>
   {% endif %}
-
-
-
+  <h3>Add new comment</h3>
+  {% if user.is_authenticated %}
+    <form method="post">
+      {% csrf_token %}
+      {{ form }}
+      <button type="submit" class="btn btn-success">Sent</button>
+    </form>
+  {% else %}
+    <p><a href="{% url "admin:login" %}">Need Login</a></p>
+  {% endif %}
 {% endblock %}

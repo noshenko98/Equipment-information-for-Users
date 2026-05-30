@@ -4,16 +4,17 @@ from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
+from django.views.generic.edit import FormMixin
 
 from equipment_information.forms import (ManufacturerSearchForm,
                                          EquipmentCategorySearchForm,
                                          UserUsernameSearchForm,
                                          UserCreateForm,
                                          UserUpdateForm,
-                                         EquipmentNameModelSearchForm)
+                                         EquipmentNameModelSearchForm, CommentaryForm)
 from equipment_information.models import (Manufacturer,
                                           Equipment,
                                           Commentary,
@@ -148,7 +149,10 @@ def remove_from_favorites(request, pk_user, pk_equipment):
     if request.user.id == pk_user:
         equipment = Equipment.objects.get(pk=pk_equipment)
         request.user.favorite_equipment.remove(equipment)
-    return HttpResponseRedirect(reverse_lazy("equipment_information:user-detail", args=[pk_user]))
+    if not request.GET.get("from"):
+        return HttpResponseRedirect(reverse_lazy("equipment_information:user-detail", args=[pk_user]))
+    return HttpResponseRedirect(reverse_lazy("equipment_information:equipment-detail", args=[pk_equipment]))
+
 
 
 class UserCreateView(LoginRequiredMixin, generic.CreateView):
@@ -197,6 +201,30 @@ class EquipmentListView(LoginRequiredMixin, generic.ListView):
         return queryset
 
 
-class EquipmentDetailView(LoginRequiredMixin, generic.DetailView):
+class EquipmentDetailView(LoginRequiredMixin, FormMixin, generic.DetailView):
     model = Equipment
+    form_class = CommentaryForm
     queryset = Equipment.objects.all().select_related("manufacturer")
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect("login")
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        return self.form_invalid(form)
+
+    def form_valid(self, form):
+        comment = form.save(commit=False)
+        comment.equipment_post = self.object
+        comment.user = self.request.user
+        comment.save()
+        return redirect("equipment_information:equipment-detail", pk=self.object.pk)
+
+
+@login_required
+def add_to_favorites(request, pk_equipment):
+    equipment = Equipment.objects.get(pk=pk_equipment)
+    request.user.favorite_equipment.add(equipment)
+    return HttpResponseRedirect(reverse_lazy("equipment_information:equipment-detail", args=[pk_equipment]))

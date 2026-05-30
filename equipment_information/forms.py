@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 
-
+from equipment_information.models import Commentary
 
 
 class ManufacturerSearchForm(forms.Form):
@@ -65,3 +65,14 @@ class EquipmentNameModelSearchForm(forms.Form):
                                            "placeholder":
                                                "Search by name or model",
                                        }))
+
+
+class CommentaryForm(forms.ModelForm):
+    class Meta:
+        model = Commentary
+        fields = ["content"]
+        widgets = {
+            "content": forms.Textarea(
+                attrs={"rows": 3,
+                       "placeholder": "Your comment..."}),
+        }
