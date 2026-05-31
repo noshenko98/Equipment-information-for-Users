@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 
-from equipment_information.models import Commentary
+from equipment_information.models import Commentary, Equipment
 
 
 class ManufacturerSearchForm(forms.Form):
@@ -76,3 +76,43 @@ class CommentaryForm(forms.ModelForm):
                 attrs={"rows": 3,
                        "placeholder": "Your comment..."}),
         }
+
+
+class EquipmentCreatForm(forms.ModelForm):
+    name = forms.CharField(
+        max_length=100,
+        required=True,
+        label="Equipment Name",
+        widget=forms.TextInput(attrs={
+            "placeholder": "Enter Equipment Name",
+        })
+    )
+    model = forms.CharField(
+        max_length=100,
+        required=True,
+        label="Equipment Model",
+        widget=forms.TextInput(attrs={
+            "placeholder": "Enter a unique model",
+        })
+    )
+    price = forms.CharField(
+        max_length=100,
+        required=True,
+        label="Price",
+        widget=forms.NumberInput(
+            attrs={
+                "placeholder": "Enter the price in UAH",
+            }
+        ))
+
+
+    class Meta:
+        model = Equipment
+        fields = [
+            "name",
+            "model",
+            "price",
+            "tech_specifications",
+            "manufacturer",
+            "category",
+        ]

@@ -14,7 +14,9 @@ from equipment_information.forms import (ManufacturerSearchForm,
                                          UserUsernameSearchForm,
                                          UserCreateForm,
                                          UserUpdateForm,
-                                         EquipmentNameModelSearchForm, CommentaryForm)
+                                         EquipmentNameModelSearchForm,
+                                         CommentaryForm,
+                                         EquipmentCreatForm)
 from equipment_information.models import (Manufacturer,
                                           Equipment,
                                           Commentary,
@@ -228,3 +230,9 @@ def add_to_favorites(request, pk_equipment):
     equipment = Equipment.objects.get(pk=pk_equipment)
     request.user.favorite_equipment.add(equipment)
     return HttpResponseRedirect(reverse_lazy("equipment_information:equipment-detail", args=[pk_equipment]))
+
+
+class EquipmentCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Equipment
+    success_url = reverse_lazy("equipment_information:equipment-list")
+    form_class = EquipmentCreatForm
