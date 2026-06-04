@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Are you sure you want to delete the manufacturer and
-    all equipment items associated with it?</h1>
-  <form action="" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Yes">
-  </form>
+  <section class="py-sm-7 py-5 position-relative">
+    <div class="container">
+      <h1>Are you sure you want to delete the manufacturer and
+        all equipment items associated with it?</h1>
+      <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger" value="Yes">
+        <a href="{{ request.META.HTTP_REFERER|default:'/' }}" class="btn btn-secondary ms-2">No</a>
+      </form>
+    </div>
+  </section>
 {% endblock %}

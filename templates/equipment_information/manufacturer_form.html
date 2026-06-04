@@ -1,10 +1,15 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% block content %}
-  <h1>{{ object|yesno:"Update,Create" }} manufacturer</h1>
-  <form action="" method="post" novalidate>
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="{{ object|yesno:"Update,Create" }}">
-  </form>
+  <section class="py-sm-7 py-5 position-relative">
+    <div class="container">
+      <h1>{{ object|yesno:"Update,Create" }} manufacturer</h1>
+      <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" class="btn btn-dark bg-gradient" value="{{ object|yesno:"Update,Create" }}">
+      </form>
+    </div>
+  </section>
 {% endblock %}

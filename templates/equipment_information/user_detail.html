@@ -1,15 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Username: {{ user.username }}</h1>
-  <h3>{{ user.first_name }} {{ user.last_name }}</h3>
-  <ul>
-  {% for equipment in user.favorite_equipment.all %}
-    <li>
-      {{ equipment }}
-      {% if user.id == request.user.id %}
-      <a href="{% url "equipment_information:remove-favorites" pk_user=user.id pk_equipment=equipment.id %}">⭐</a></li>
+  <section class="py-sm-7 py-5 position-relative">
+    <div class="container">
+      <h2>{{ user.username }} - {{user.first_name }} {{ user.last_name }}</h2>
+
+      <h3>Favorites List:</h3>
+      <ul>
+      {% if user.favorite_equipment.all %}
+      {% for equipment in user.favorite_equipment.all %}
+        <li>
+          {{ equipment }}
+          {% if user.id == request.user.id %}
+          <a href="{% url "equipment_information:remove-favorites" pk_user=user.id pk_equipment=equipment.id %}">⭐</a></li>
+          {% endif %}
+      {% endfor %}
+      {% else %}
+        <h4>{{ user.first_name }} doesn't have a list of her favorites yet</h4>
       {% endif %}
-  {% endfor %}
-  </ul>
+      </ul>
+    </div>
+  </section>
 {% endblock %}

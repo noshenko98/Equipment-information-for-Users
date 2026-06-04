@@ -46,7 +46,7 @@ class ManufacturerListView(LoginRequiredMixin, generic.ListView):
     model = Manufacturer
     context_object_name = "manufacturer_list"
     template_name = "equipment_information/manufacturer_list.html"
-    paginate_by=5
+    paginate_by = 5
 
     def get_queryset(self):
         queryset = Manufacturer.objects.all()
@@ -85,7 +85,7 @@ class EquipmentCategoryListView(LoginRequiredMixin, generic.ListView):
     model = EquipmentCategory
     context_object_name = "equipment_category_list"
     template_name = "equipment_information/equipment_category_list.html"
-    paginate_by = 2
+    paginate_by = 5
 
     def get_queryset(self):
         queryset = EquipmentCategory.objects.all()

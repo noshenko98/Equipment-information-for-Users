@@ -1,39 +1,43 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% block content %}
-	<h1>Equipment category list
-    <p><a href="{% url "equipment_information:equipments-category-create" %}">Create</a></p>
+  <section class="py-sm-7 py-5 position-relative">
+    <div class="container">
+      <h1 class="d-flex justify-content-between align-items-center">Equipment category list
+        <a href="{% url "equipment_information:equipments-category-create" %}" class="btn btn-dark">
+          Create
+        </a>
+      </h1>
+      {% if equipment_category_list %}
+        <form action="" method="get" class="d-flex align-items-center gap-1">
+          {{ search_form|crispy }}
+          <input type="submit"  class="btn btn-dark bg-gradient" value="🔍️">
+        </form>
 
-  </h1>
-
-  {% if equipment_category_list %}
-    <form action="" method="get">
-      {{ search_form }}
-      <input type="submit" value="🔍️">
-    </form>
-
-    <table>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Update</th>
-        <th>Delete</th>
-      </tr>
-      {% for equipment_category in equipment_category_list %}
-        <tr>
-          <td>{{ equipment_category.id }}</td>
-          <td>{{ equipment_category.name }}</td>
-          <td>
-            <a href="{% url "equipment_information:equipments-category-update" pk=equipment_category.id %}">Update</a>
-          </td>
-          <td>
-            <a href="{% url "equipment_information:equipments-category-delete" pk=equipment_category.id %}">Delete</a>
-          </td>
-        </tr>
-      {% endfor %}
-    </table>
-    {% else %}
-    <h4>There are no equipment category in the service.</h4>
-  {% endif %}
-
+        <table class="table">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+          {% for equipment_category in equipment_category_list %}
+            <tr>
+              <td>{{ equipment_category.id }}</td>
+              <td>{{ equipment_category.name }}</td>
+              <td>
+                <a href="{% url "equipment_information:equipments-category-update" pk=equipment_category.id %}">Update</a>
+              </td>
+              <td>
+                <a href="{% url "equipment_information:equipments-category-delete" pk=equipment_category.id %}">Delete</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <h4>There are no equipment category in the service.</h4>
+      {% endif %}
+    </div>
+  </section>
 {% endblock %}

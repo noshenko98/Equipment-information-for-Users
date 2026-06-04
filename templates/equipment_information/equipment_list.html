@@ -1,26 +1,30 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% block content %}
-	<h1>Equipment list
-    <p><a href="{% url "equipment_information:equipment-create" %}">Create</a></p>
-  </h1>
+  <section class="py-sm-7 py-5 position-relative">
+    <div class="container">
+      <h1 class="d-flex justify-content-between align-items-center">Equipment list
+       <a href="{% url "equipment_information:equipment-create" %}" class="btn btn-dark">Create</a>
+      </h1>
+      {% if equipment_list %}
+        <form action="" method="get" class="d-flex align-items-center gap-1">
+          {{ search_form|crispy }}
+          <input type="submit"  class="btn btn-dark bg-gradient" value="🔍️">
+        </form>
 
-  {% if equipment_list %}
-    <form action="" method="get">
-      {{ search_form }}
-      <input type="submit" value="🔍️">
-    </form>
+        {% for equipment in equipment_list %}
+          <h3><a href="{% url "equipment_information:equipment-detail" pk=equipment.id %}">
+            {{ equipment }} {{ equipment.price }}
+          </a></h3>
+          <p>The equipment page was created at {{ equipment.created_time }}</p>
+          <p>{{ equipment.comments.count }} Comment{{ equipment.comments.count|pluralize }}</p>
+          <hr class="border border-dark border-2 opacity-100">
+        {% endfor %}
 
-    {% for equipment in equipment_list %}
-      <h2><a href="{% url "equipment_information:equipment-detail" pk=equipment.id %}">
-        {{ equipment }} {{ equipment.price }}
-      </a></h2>
-      <p>The equipment page was created at {{ equipment.created_time }}</p>
-      <p>{{ equipment.comments.count }} Comment{{ equipment.comments.count|pluralize }}</p>
-    {% endfor %}
-
-    {% else %}
-    <h4>There are no users in the service.</h4>
-  {% endif %}
-
+        {% else %}
+        <h4>There are no users in the service.</h4>
+      {% endif %}
+    </div>
+  </section>
 {% endblock %}

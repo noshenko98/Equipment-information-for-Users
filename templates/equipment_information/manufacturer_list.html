@@ -1,41 +1,43 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% block content %}
-	<h1>Manufacturer list
-    <p><a href="{% url "equipment_information:manufacturer-create" %}">Create</a></p>
+  <section class="py-sm-7 py-5 position-relative">
+    <div class="container">
+      <h1 class="d-flex justify-content-between align-items-center">Manufacturer list
+        <a href="{% url "equipment_information:manufacturer-create" %}" class="btn btn-dark">Create</a>
+      </h1>
+      {% if manufacturer_list %}
+        <form action="" method="get" class="d-flex align-items-center gap-1">
+          {{ search_form|crispy }}
+          <input type="submit"  class="btn btn-dark bg-gradient" value="🔍️">
+        </form>
 
-  </h1>
-
-  {% if manufacturer_list %}
-    <form action="" method="get" class="form-inline">
-      {{ search_form }}
-      <input type="submit" class="btn btn-primary" value="🔍️">
-    </form>
-
-    <table>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Country</th>
-        <th>Update</th>
-        <th>Delete</th>
-      </tr>
-      {% for manufacturer in manufacturer_list %}
-        <tr>
-          <td>{{ manufacturer.id }}</td>
-          <td>{{ manufacturer.name }}</td>
-          <td>{{ manufacturer.country }}</td>
-          <td>
-            <a href="{% url "equipment_information:manufacturer-update" pk=manufacturer.id %}">Update</a>
-          </td>
-          <td>
-            <a href="{% url "equipment_information:manufacturer-delete" pk=manufacturer.id %}">Delete</a>
-          </td>
-        </tr>
-      {% endfor %}
-    </table>
-    {% else %}
-    <h4>There are no manufacturers in the service.</h4>
-  {% endif %}
-
+        <table class="table">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+          {% for manufacturer in manufacturer_list %}
+            <tr>
+              <td>{{ manufacturer.id }}</td>
+              <td>{{ manufacturer.name }}</td>
+              <td>{{ manufacturer.country }}</td>
+              <td>
+                <a href="{% url "equipment_information:manufacturer-update" pk=manufacturer.id %}">Update</a>
+              </td>
+              <td>
+                <a href="{% url "equipment_information:manufacturer-delete" pk=manufacturer.id %}">Delete</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <h4>There are no manufacturers in the service.</h4>
+      {% endif %}
+    </div>
+  </section>
 {% endblock %}
