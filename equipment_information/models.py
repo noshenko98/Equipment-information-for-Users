@@ -32,7 +32,7 @@ class Equipment(models.Model):
     name = models.CharField(max_length=100)
     model = models.CharField(max_length=100, unique=True)
     price = models.DecimalField(decimal_places=2, max_digits=10)
-    tech_specifications = models.JSONField(default=dict, blank=True)
+    tech_specifications = models.JSONField(default=dict,blank=True)
     created_time = models.DateTimeField(auto_now_add=True)
     manufacturer = models.ForeignKey(Manufacturer,
                                      on_delete=models.CASCADE,

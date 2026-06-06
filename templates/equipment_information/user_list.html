@@ -14,7 +14,7 @@
             </form>
         <table class="table">
           <tr>
-            <th>ID</th>
+            <th>ID/⭐</th>
             <th>Username</th>
             <th>Full name</th>
             <th>Update</th>
@@ -22,7 +22,7 @@
           </tr>
           {% for user in user_list %}
             <tr>
-              <td><a href="{% url "equipment_information:user-detail" pk=user.id %}">{{ user.id }}</a></td>
+              <td><a href="{% url "equipment_information:user-detail" pk=user.id %}">{{ user.id }}/⭐</a></td>
               <td>{{ user.username }}</td>
               <td>{{ user.first_name }} {{ user.last_name }}</td>
               <td>

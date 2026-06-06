@@ -90,6 +90,7 @@ class EquipmentCreatForm(forms.ModelForm):
             "placeholder": "Enter Equipment Name",
         })
     )
+
     model = forms.CharField(
         max_length=100,
         required=True,
@@ -107,6 +108,11 @@ class EquipmentCreatForm(forms.ModelForm):
                 "placeholder": "Enter the price in UAH",
             }
         ))
+    tech_specifications = forms.JSONField(
+        required=False,
+        label="Tech Specifications.",
+        help_text="*Enter Tech Specifications (e.g. {\"RAM\": \"8GB\"})"
+    )
 
 
     class Meta:
@@ -119,3 +125,10 @@ class EquipmentCreatForm(forms.ModelForm):
             "manufacturer",
             "category",
         ]
+        widgets = {
+            'tech_specifications': forms.Textarea(attrs={
+                'rows': 3,  # Робить поле зручним за висотою
+                'class': 'form-control',  # Якщо використовуєте Bootstrap
+            }),
+        }
+
