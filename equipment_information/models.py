@@ -13,9 +13,10 @@ class Manufacturer(models.Model):
 
 
 class User(AbstractUser):
-    favorite_equipment = models.ManyToManyField("Equipment",
-                                                blank=True,
-                                                related_name="favourite_equipment")
+    favorite_equipment = (
+        models.ManyToManyField("Equipment",
+                               blank=True,
+                               related_name="favourite_equipment"))
 
     def __str__(self):
         return f"{self.username}"

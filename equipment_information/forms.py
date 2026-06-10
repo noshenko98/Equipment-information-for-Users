@@ -50,7 +50,10 @@ class UserCreateForm(UserCreationForm):
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ["username","first_name", "last_name", "favorite_equipment"]
+        fields = ["username",
+                  "first_name",
+                  "last_name",
+                  "favorite_equipment"]
         widgets = {
             "favorite_equipment": forms.CheckboxSelectMultiple()
         }

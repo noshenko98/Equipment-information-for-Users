@@ -152,8 +152,12 @@ def remove_from_favorites(request, pk_user, pk_equipment):
         equipment = Equipment.objects.get(pk=pk_equipment)
         request.user.favorite_equipment.remove(equipment)
     if not request.GET.get("from"):
-        return HttpResponseRedirect(reverse_lazy("equipment_information:user-detail", args=[pk_user]))
-    return HttpResponseRedirect(reverse_lazy("equipment_information:equipment-detail", args=[pk_equipment]))
+        return HttpResponseRedirect(
+            reverse_lazy("equipment_information:user-detail",
+                         args=[pk_user]))
+    return HttpResponseRedirect(
+        reverse_lazy("equipment_information:equipment-detail",
+                     args=[pk_equipment]))
 
 
 
@@ -163,7 +167,9 @@ class UserCreateView(LoginRequiredMixin, generic.CreateView):
     success_url = reverse_lazy("equipment_information:user-list")
 
 
-class UserUpdate(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+class UserUpdate(LoginRequiredMixin,
+                 UserPassesTestMixin,
+                 generic.UpdateView):
     model = User
     form_class = UserUpdateForm
     success_url = reverse_lazy("equipment_information:user-list")
@@ -173,7 +179,9 @@ class UserUpdate(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
         return self.request.user == user or self.request.user.is_superuser
 
 
-class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+class UserDeleteView(LoginRequiredMixin,
+                     UserPassesTestMixin,
+                     generic.DeleteView):
     model = User
     success_url = reverse_lazy("equipment_information:user-list")
 
@@ -196,14 +204,20 @@ class EquipmentListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        queryset = Equipment.objects.select_related("manufacturer", "category").all()
+        queryset = Equipment.objects.select_related(
+            "manufacturer",
+            "category").all()
         search_query = self.request.GET.get("search_query")
         if search_query:
-            return queryset.filter(Q(name__icontains=search_query) | Q(model__icontains=search_query))
+            return queryset.filter(
+                Q(name__icontains=search_query) |
+                Q(model__icontains=search_query))
         return queryset
 
 
-class EquipmentDetailView(LoginRequiredMixin, FormMixin, generic.DetailView):
+class EquipmentDetailView(LoginRequiredMixin,
+                          FormMixin,
+                          generic.DetailView):
     model = Equipment
     form_class = CommentaryForm
     queryset = Equipment.objects.all().select_related("manufacturer")
@@ -222,14 +236,17 @@ class EquipmentDetailView(LoginRequiredMixin, FormMixin, generic.DetailView):
         comment.equipment_post = self.object
         comment.user = self.request.user
         comment.save()
-        return redirect("equipment_information:equipment-detail", pk=self.object.pk)
+        return redirect("equipment_information:equipment-detail",
+                        pk=self.object.pk)
 
 
 @login_required
 def add_to_favorites(request, pk_equipment):
     equipment = Equipment.objects.get(pk=pk_equipment)
     request.user.favorite_equipment.add(equipment)
-    return HttpResponseRedirect(reverse_lazy("equipment_information:equipment-detail", args=[pk_equipment]))
+    return HttpResponseRedirect(
+        reverse_lazy("equipment_information:equipment-detail",
+                     args=[pk_equipment]))
 
 
 class EquipmentCreateView(LoginRequiredMixin, generic.CreateView):
