@@ -127,8 +127,8 @@ class EquipmentCreatForm(forms.ModelForm):
         ]
         widgets = {
             'tech_specifications': forms.Textarea(attrs={
-                'rows': 3,  # Робить поле зручним за висотою
-                'class': 'form-control',  # Якщо використовуєте Bootstrap
+                'rows': 3,
+                'class': 'form-control',
             }),
         }
 
