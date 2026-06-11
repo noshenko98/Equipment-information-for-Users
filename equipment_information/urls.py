@@ -18,7 +18,7 @@ Including another URLconf
 from django.urls import path
 
 
-from equipment_information.views import (index, ManufacturerListView,
+from equipment_information.views import (ManufacturerListView,
                                          ManufacturerCreateView,
                                          ManufacturerUpdateView,
                                          ManufacturerDeleteView,
@@ -28,17 +28,18 @@ from equipment_information.views import (index, ManufacturerListView,
                                          EquipmentCategoryDeleteView,
                                          UserListView,
                                          UserDetailView,
-                                         remove_from_favorites,
                                          UserCreateView,
                                          UserUpdate,
                                          UserDeleteView,
                                          EquipmentListView,
                                          EquipmentDetailView,
-                                         add_to_favorites,
-                                         EquipmentCreateView,)
+                                         EquipmentCreateView,
+                                         IndexView,
+                                         AddToFavoritesView,
+                                         RemoveFromFavoritesView)
 
 urlpatterns = [
-    path("", index, name="index"),
+    path("", IndexView.as_view(), name="index"),
     path("manufacturers/", ManufacturerListView.as_view(),
          name="manufacturer-list"),
     path("manufacturers/create/",ManufacturerCreateView.as_view(),
@@ -65,7 +66,7 @@ urlpatterns = [
     path("users/<int:pk>/", UserDetailView.as_view(),
          name="user-detail"),
     path("users/<int:pk_user>/remove-favorites/<int:pk_equipment>",
-         remove_from_favorites,
+         RemoveFromFavoritesView.as_view(),
         name="remove-favorites"),
     path("users/create/", UserCreateView.as_view(),
          name="user-create"),
@@ -77,7 +78,7 @@ urlpatterns = [
          name="equipment-list"),
     path("equipment/<int:pk>/", EquipmentDetailView.as_view(),
          name="equipment-detail"),
-    path("users/add-to-favorites/<int:pk_equipment>", add_to_favorites,
+    path("users/add-to-favorites/<int:pk_equipment>", AddToFavoritesView.as_view(),
         name="add-favorites"),
     path("equipment/create/", EquipmentCreateView.as_view(),
          name="equipment-create"),

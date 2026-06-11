@@ -1,10 +1,9 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserChangeForm
+
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import FormMixin
@@ -24,22 +23,18 @@ from equipment_information.models import (Manufacturer,
                                           User)
 
 
-@login_required
-def index(request):
-    num_manufacturers = Manufacturer.objects.all().count()
-    num_equipments = Equipment.objects.all().count()
-    num_comments = Commentary.objects.all().count()
-    count_visits = request.session.get("count_visits", 0)
-    request.session["count_visits"] = count_visits + 1
-    context = {
-        "num_manufacturers": num_manufacturers,
-        "num_equipments": num_equipments,
-        "num_comments": num_comments,
-        "count_visits": count_visits + 1,
-    }
-    return render(request,
-                  "equipment_information/index.html",
-                  context=context)
+class IndexView(LoginRequiredMixin, generic.TemplateView):
+    template_name = "equipment_information/index.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        count_visits = self.request.session.get("count_visits", 0)
+        self.request.session["count_visits"] = count_visits + 1
+        context["num_manufacturers"] = Manufacturer.objects.all().count()
+        context["num_equipments"] = Equipment.objects.all().count()
+        context["num_comments"] = Commentary.objects.all().count()
+        context["count_visits"] = count_visits
+        return context
 
 
 class ManufacturerListView(LoginRequiredMixin, generic.ListView):
@@ -146,19 +141,19 @@ class UserListView(LoginRequiredMixin, generic.ListView):
 class UserDetailView(LoginRequiredMixin, generic.DetailView):
     model = User
 
-@login_required
-def remove_from_favorites(request, pk_user, pk_equipment):
-    if request.user.id == pk_user:
-        equipment = Equipment.objects.get(pk=pk_equipment)
-        request.user.favorite_equipment.remove(equipment)
-    if not request.GET.get("from"):
-        return HttpResponseRedirect(
-            reverse_lazy("equipment_information:user-detail",
-                         args=[pk_user]))
-    return HttpResponseRedirect(
-        reverse_lazy("equipment_information:equipment-detail",
-                     args=[pk_equipment]))
 
+class RemoveFromFavoritesView(LoginRequiredMixin, generic.View):
+    def get(self, request, pk_user, pk_equipment):
+        if request.user.id == pk_user:
+            equipment = Equipment.objects.get(pk=pk_equipment)
+            request.user.favorite_equipment.remove(equipment)
+        if not request.GET.get("from"):
+            return HttpResponseRedirect(
+                reverse_lazy("equipment_information:user-detail",
+                             args=[pk_user]))
+        return HttpResponseRedirect(
+            reverse_lazy("equipment_information:equipment-detail",
+                         args=[pk_equipment]))
 
 
 class UserCreateView(LoginRequiredMixin, generic.CreateView):
@@ -240,13 +235,13 @@ class EquipmentDetailView(LoginRequiredMixin,
                         pk=self.object.pk)
 
 
-@login_required
-def add_to_favorites(request, pk_equipment):
-    equipment = Equipment.objects.get(pk=pk_equipment)
-    request.user.favorite_equipment.add(equipment)
-    return HttpResponseRedirect(
-        reverse_lazy("equipment_information:equipment-detail",
-                     args=[pk_equipment]))
+class AddToFavoritesView(LoginRequiredMixin, generic.View):
+    def get(self,request, pk_equipment):
+        equipment = Equipment.objects.get(pk=pk_equipment)
+        request.user.favorite_equipment.add(equipment)
+        return HttpResponseRedirect(
+            reverse_lazy("equipment_information:equipment-detail",
+                         args=[pk_equipment]))
 
 
 class EquipmentCreateView(LoginRequiredMixin, generic.CreateView):
