@@ -49,7 +49,7 @@ class Equipment(models.Model):
 
 
 class Commentary(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+    user = models.ForeignKey(settings.base.AUTH_USER_MODEL,
                              on_delete=models.CASCADE,
                              related_name="comments")
     equipment_post = models.ForeignKey(Equipment,
