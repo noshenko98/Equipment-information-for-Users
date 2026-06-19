@@ -166,7 +166,7 @@
 
               <li class="nav-item my-auto ms-3 ms-lg-0">
                 <a href="{% url "equipment_information:user-detail" pk=user.id %}"
-                  class="btn btn-sm  bg-gradient-dark  btn-round mb-0 me-1 mt-2 mt-md-0">1{{ user.get_username }}</a>
+                  class="btn btn-sm  bg-gradient-dark  btn-round mb-0 me-1 mt-2 mt-md-0">{{ user.get_username }}</a>
               </li>
               {% else %}
               <li class="nav-item ms-lg-auto">
