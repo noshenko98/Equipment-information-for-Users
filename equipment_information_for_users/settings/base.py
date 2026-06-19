@@ -21,20 +21,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "l8dwa@)gPlLq2!hSDQ+HwIH-&X!4Qd^gVdF}V{M<3Y9>;k3haWo&4")
+SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
-#
-# ALLOWED_HOSTS = ["127.0.0.1"]
-#
-# if not DEBUG:
-#     SESSION_COOKIE_SECURE = True
-#     CSRF_COOKIE_SECURE = True
-#     SECURE_SSL_REDIRECT = True
-#     SECURE_HSTS_SECONDS = 31536000
-#     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-#     SECURE_HSTS_PRELOAD = True
 
 # Application definition
 
@@ -85,16 +74,9 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 WSGI_APPLICATION = "equipment_information_for_users.wsgi.application"
 
-#
-# # Database
-# # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-#
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
+
+# Database
+# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 
 # Password validation
