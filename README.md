@@ -1,10 +1,10 @@
 # Equipment information for users
 
 - [Equipment information for users project deployed to Render](https://equipment-information-for-users.onrender.com/)
-</br> 
-You can use this user account for testing </br>
-Username: test_user </br>
-Password: RiG333_)
+- You can use this user account for testing
+ > Username: **test_user**<br>
+ > Password: **RiG333_)**
+
 - This is a web app where you can post and view posts about 
 technology and its specifications, as well as leave or view 
 comments
