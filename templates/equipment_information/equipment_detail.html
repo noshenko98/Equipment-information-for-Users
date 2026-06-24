@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="py-sm-7 py-5 position-relative">
+    <div class="container">
+      <h1>Equipment details</h1>
+      <h3 class="d-flex justify-content-between align-items-center">{{ equipment }}
+        <div>
+          {% if equipment in request.user.favorite_equipment.all %}
+            <h5>Remove from favorites</h5>
+        <a href="{% url "equipment_information:remove-favorites" pk_equipment=equipment.id pk_user=request.user.id %}?from=equipmen" class="btn btn-dark">
+        👉🏻🗑️⭐
+        </a>
+      {% else %}
+            <h5>Add to favorites</h5>
+        <a href="{% url "equipment_information:add-favorites" pk_equipment=equipment.id %}" class="btn btn-dark">⭐</a>
+      {% endif %}
+        </div>
+      </h3>
+      <h5>The price on the marketplace is approximately {{ equipment.price }} UAH</h5>
+      <hr class="border border-dark border-2 opacity-100">
+      <h6>The equipment has the following technical specifications:</h6>
+
+      <ul>
+        {% for key, value in equipment.tech_specifications.items %}
+          <li>{{ key }}: {{ value }}</li>
+        {% endfor %}
+      <hr class="border border-dark border-2 opacity-100">
+      </ul>
+      <h6>Comments:</h6>
+      {% if equipment.comments.all %}
+        {% for comment in equipment.comments.all %}
+        <p>{{ comment.user.username }} at {{ comment.created_time }}</p>
+        <p>{{ comment.content }}</p>
+          <hr class="border border-dark border-1 opacity-50">
+        {% endfor %}
+      {% else %}
+        <p>There are no comments on this equipment </p>
+      {% endif %}
+      <h3>Add new comment</h3>
+      {% if user.is_authenticated %}
+        <form method="post">
+          {% csrf_token %}
+          {{ form }}
+          <button type="submit" class="btn btn-dark bg-gradient">Sent</button>
+        </form>
+      {% else %}
+        <p><a href="{% url "admin:login" %}">Need Login</a></p>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}

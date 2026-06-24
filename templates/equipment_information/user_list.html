@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <section class="py-sm-7 py-5 position-relative">
+    <div class="container">
+      <h1 class="d-flex justify-content-between align-items-center">User list
+        <a href="{% url "equipment_information:user-create" %}" class="btn btn-dark">Create</a>
+      </h1>
+      {% if user_list %}
+            <form action="" method="get" class="d-flex align-items-center gap-1">
+              {{ search_form|crispy }}
+              <input type="submit"  class="btn btn-dark bg-gradient" value="🔍️">
+            </form>
+        <table class="table">
+          <tr>
+            <th>ID/⭐</th>
+            <th>Username</th>
+            <th>Full name</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+          {% for user in user_list %}
+            <tr>
+              <td><a href="{% url "equipment_information:user-detail" pk=user.id %}">{{ user.id }}/⭐</a></td>
+              <td>{{ user.username }}</td>
+              <td>{{ user.first_name }} {{ user.last_name }}</td>
+              <td>
+                {% if user.id == request.user.id or request.user.is_superuser %}
+                <a href="{% url "equipment_information:user-update" pk=user.id %}">Update</a>
+                {% endif %}
+              </td>
+              <td>
+                {% if user.id == request.user.id or request.user.is_superuser %}
+                <a href="{% url "equipment_information:user-delete" pk=user.id %}">Delete</a>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <h4>There are no users in the service.</h4>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}

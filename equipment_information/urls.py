@@ -1,0 +1,88 @@
+"""
+URL configuration for equipment_information_for_users project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/6.0/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+
+from django.urls import path
+
+
+from equipment_information.views import (ManufacturerListView,
+                                         ManufacturerCreateView,
+                                         ManufacturerUpdateView,
+                                         ManufacturerDeleteView,
+                                         EquipmentCategoryListView,
+                                         EquipmentCategoryCreateView,
+                                         EquipmentCategoryUpdateView,
+                                         EquipmentCategoryDeleteView,
+                                         UserListView,
+                                         UserDetailView,
+                                         UserCreateView,
+                                         UserUpdate,
+                                         UserDeleteView,
+                                         EquipmentListView,
+                                         EquipmentDetailView,
+                                         EquipmentCreateView,
+                                         IndexView,
+                                         AddToFavoritesView,
+                                         RemoveFromFavoritesView)
+
+urlpatterns = [
+    path("", IndexView.as_view(), name="index"),
+    path("manufacturers/", ManufacturerListView.as_view(),
+         name="manufacturer-list"),
+    path("manufacturers/create/",ManufacturerCreateView.as_view(),
+         name="manufacturer-create"),
+    path("manufacturers/<int:pk>/update/",
+         ManufacturerUpdateView.as_view(),
+         name="manufacturer-update"),
+    path("manufacturers/<int:pk>/delete/",
+         ManufacturerDeleteView.as_view(),
+         name="manufacturer-delete"),
+    path("equipments-category/", EquipmentCategoryListView.as_view(),
+         name="equipments-category-list"),
+    path("equipments-category/create/",
+         EquipmentCategoryCreateView.as_view(),
+         name="equipments-category-create"),
+    path("equipments-category/<int:pk>/update/",
+         EquipmentCategoryUpdateView.as_view(),
+         name="equipments-category-update"),
+    path("equipments-category/<int:pk>/delete/",
+         EquipmentCategoryDeleteView.as_view(),
+         name="equipments-category-delete"),
+    path("users/", UserListView.as_view(),
+         name="user-list"),
+    path("users/<int:pk>/", UserDetailView.as_view(),
+         name="user-detail"),
+    path("users/<int:pk_user>/remove-favorites/<int:pk_equipment>",
+         RemoveFromFavoritesView.as_view(),
+        name="remove-favorites"),
+    path("users/create/", UserCreateView.as_view(),
+         name="user-create"),
+    path("users/<int:pk>/update/", UserUpdate.as_view(),
+         name="user-update"),
+    path("users/<int:pk>/delete/", UserDeleteView.as_view(),
+         name="user-delete"),
+    path("equipment/", EquipmentListView.as_view(),
+         name="equipment-list"),
+    path("equipment/<int:pk>/", EquipmentDetailView.as_view(),
+         name="equipment-detail"),
+    path("users/add-to-favorites/<int:pk_equipment>", AddToFavoritesView.as_view(),
+        name="add-favorites"),
+    path("equipment/create/", EquipmentCreateView.as_view(),
+         name="equipment-create"),
+
+]
+
+app_name = "equipment_information"

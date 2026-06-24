@@ -1,0 +1,760 @@
+[
+  {
+    "model": "equipment_information.manufacturer",
+    "pk": 1,
+    "fields": {
+      "name": "Asus",
+      "country": "Taiwan"
+    }
+  },
+  {
+    "model": "equipment_information.manufacturer",
+    "pk": 2,
+    "fields": {
+      "name": "Lenovo",
+      "country": "China"
+    }
+  },
+  {
+    "model": "equipment_information.manufacturer",
+    "pk": 3,
+    "fields": {
+      "name": "Samsung",
+      "country": "South Korea"
+    }
+  },
+  {
+    "model": "equipment_information.manufacturer",
+    "pk": 4,
+    "fields": {
+      "name": "Apple",
+      "country": "USA"
+    }
+  },
+  {
+    "model": "equipment_information.manufacturer",
+    "pk": 5,
+    "fields": {
+      "name": "Sony",
+      "country": "Japan"
+    }
+  },
+  {
+    "model": "equipment_information.manufacturer",
+    "pk": 6,
+    "fields": {
+      "name": "Acer",
+      "country": "Taiwan"
+    }
+  },
+  {
+    "model": "equipment_information.manufacturer",
+    "pk": 7,
+    "fields": {
+      "name": "Xiaomi",
+      "country": "China"
+    }
+  },
+  {
+    "model": "equipment_information.manufacturer",
+    "pk": 8,
+    "fields": {
+      "name": "LG",
+      "country": "South Korea"
+    }
+  },
+  {
+    "model": "equipment_information.manufacturer",
+    "pk": 9,
+    "fields": {
+      "name": "Microsoft",
+      "country": "USA"
+    }
+  },
+  {
+    "model": "equipment_information.manufacturer",
+    "pk": 10,
+    "fields": {
+      "name": "Nintendo",
+      "country": "Japan"
+    }
+  },
+  {
+    "model": "equipment_information.equipmentcategory",
+    "pk": 1,
+    "fields": {
+      "name": "Laptops"
+    }
+  },
+  {
+    "model": "equipment_information.equipmentcategory",
+    "pk": 2,
+    "fields": {
+      "name": "phones"
+    }
+  },
+  {
+    "model": "equipment_information.equipmentcategory",
+    "pk": 3,
+    "fields": {
+      "name": "TVs"
+    }
+  },
+  {
+    "model": "equipment_information.equipmentcategory",
+    "pk": 4,
+    "fields": {
+      "name": "game consoles"
+    }
+  },
+  {
+    "model": "equipment_information.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$testpassword$fakehash",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "ivan_kovalenko",
+      "first_name": "Іван",
+      "last_name": "Коваленко",
+      "email": "ivan@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-01T10:00:00Z",
+      "groups": [],
+      "user_permissions": [],
+      "favorite_equipment": []
+    }
+  },
+  {
+    "model": "equipment_information.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$testpassword$fakehash",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "olena_petrenko",
+      "first_name": "Олена",
+      "last_name": "Петренко",
+      "email": "olena@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-02T11:00:00Z",
+      "groups": [],
+      "user_permissions": [],
+      "favorite_equipment": []
+    }
+  },
+  {
+    "model": "equipment_information.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$testpassword$fakehash",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "andriy_shevchenko",
+      "first_name": "Андрій",
+      "last_name": "Шевченко",
+      "email": "andriy@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-03T12:00:00Z",
+      "groups": [],
+      "user_permissions": [],
+      "favorite_equipment": []
+    }
+  },
+  {
+    "model": "equipment_information.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$testpassword$fakehash",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "maryna_boyko",
+      "first_name": "Марина",
+      "last_name": "Бойко",
+      "email": "maryna@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-04T13:00:00Z",
+      "groups": [],
+      "user_permissions": [],
+      "favorite_equipment": []
+    }
+  },
+  {
+    "model": "equipment_information.user",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$testpassword$fakehash",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "sergiy_melnyk",
+      "first_name": "Сергій",
+      "last_name": "Мельник",
+      "email": "sergiy@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-05T14:00:00Z",
+      "groups": [],
+      "user_permissions": [],
+      "favorite_equipment": []
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 1,
+    "fields": {
+      "name": "ROG Zephyrus G14",
+      "model": "GA402XV-G14.R94060",
+      "price": "67999.00",
+      "tech_specifications": {
+        "CPU": "AMD Ryzen 9 7940HS",
+        "RAM": "16GB DDR5",
+        "Storage": "1TB NVMe SSD",
+        "GPU": "NVIDIA RTX 4060 8GB",
+        "Screen": "14\" QHD+ 165Hz ROG Nebula"
+      },
+      "created_time": "2026-02-01T10:00:00Z",
+      "manufacturer": 1,
+      "category": 1
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 2,
+    "fields": {
+      "name": "Legion Pro 5",
+      "model": "16ARX8-82WM004VRA",
+      "price": "59999.00",
+      "tech_specifications": {
+        "CPU": "AMD Ryzen 7 7745HX",
+        "RAM": "32GB DDR5",
+        "Storage": "1TB SSD",
+        "GPU": "NVIDIA RTX 4060 8GB",
+        "Screen": "16\" WQXGA 240Hz"
+      },
+      "created_time": "2026-02-01T11:00:00Z",
+      "manufacturer": 2,
+      "category": 1
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 3,
+    "fields": {
+      "name": "MacBook Air 13 M3",
+      "model": "MXCR3UA/A",
+      "price": "54999.00",
+      "tech_specifications": {
+        "CPU": "Apple M3 (8-core)",
+        "RAM": "8GB Unified",
+        "Storage": "256GB Apple SSD",
+        "GPU": "10-core GPU",
+        "Screen": "13.6\" Liquid Retina"
+      },
+      "created_time": "2026-02-01T12:00:00Z",
+      "manufacturer": 4,
+      "category": 1
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 4,
+    "fields": {
+      "name": "Galaxy S24 Ultra",
+      "model": "SM-S928BZTDEUK",
+      "price": "57999.00",
+      "tech_specifications": {
+        "CPU": "Snapdragon 8 Gen 3",
+        "RAM": "12GB",
+        "Storage": "512GB",
+        "Camera": "200MP + 50MP + 12MP + 10MP",
+        "Battery": "5000 mAh"
+      },
+      "created_time": "2026-02-02T09:00:00Z",
+      "manufacturer": 3,
+      "category": 2
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 5,
+    "fields": {
+      "name": "iPhone 15 Pro Max",
+      "model": "MU773RX/A",
+      "price": "59499.00",
+      "tech_specifications": {
+        "CPU": "Apple A17 Pro",
+        "RAM": "8GB",
+        "Storage": "256GB",
+        "Camera": "48MP + 12MP + 12MP",
+        "Display": "6.7\" Super Retina XDR"
+      },
+      "created_time": "2026-02-02T10:00:00Z",
+      "manufacturer": 4,
+      "category": 2
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 6,
+    "fields": {
+      "name": "OLED TV 55 Q90",
+      "model": "QE55S90CAUXUA",
+      "price": "64999.00",
+      "tech_specifications": {
+        "Screen": "55\" OLED 4K",
+        "Refresh Rate": "144Hz",
+        "Smart TV": "Tizen OS",
+        "Audio": "40W Dolby Atmos"
+      },
+      "created_time": "2026-02-03T14:00:00Z",
+      "manufacturer": 3,
+      "category": 3
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 7,
+    "fields": {
+      "name": "PlayStation 5 Slim",
+      "model": "CFI-2016A01",
+      "price": "22999.00",
+      "tech_specifications": {
+        "CPU": "AMD Zen 2 8-core",
+        "GPU": "AMD RDNA 2",
+        "Storage": "1TB Custom SSD",
+        "Drive": "Ultra HD Blu-ray"
+      },
+      "created_time": "2026-02-04T08:00:00Z",
+      "manufacturer": 5,
+      "category": 4
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 8,
+    "fields": {
+      "name": "ROG Ally X",
+      "model": "RC72LA-NH005W",
+      "price": "39999.00",
+      "tech_specifications": {
+        "CPU": "AMD Ryzen Z1 Extreme",
+        "RAM": "24GB LPDDR5X",
+        "Storage": "1TB NVMe SSD",
+        "Screen": "7\" FHD 120Hz IPS"
+      },
+      "created_time": "2026-02-04T09:00:00Z",
+      "manufacturer": 1,
+      "category": 4
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 9,
+    "fields": {
+      "name": "Nitro V 15",
+      "model": "ANV15-51-59N0",
+      "price": "34999.00",
+      "tech_specifications": {
+        "CPU": "Intel Core i5-13420H",
+        "RAM": "16GB DDR5",
+        "Storage": "512GB SSD",
+        "GPU": "NVIDIA RTX 4050 6GB",
+        "Screen": "15.6\" FHD 144Hz"
+      },
+      "created_time": "2026-02-10T11:00:00Z",
+      "manufacturer": 6,
+      "category": 1
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 10,
+    "fields": {
+      "name": "MacBook Pro 14 M3 Max",
+      "model": "MU953UA/A",
+      "price": "144999.00",
+      "tech_specifications": {
+        "CPU": "Apple M3 Max (14-core)",
+        "RAM": "36GB Unified",
+        "Storage": "1TB SSD",
+        "GPU": "30-core GPU",
+        "Screen": "14.2\" Liquid Retina XDR"
+      },
+      "created_time": "2026-02-10T12:00:00Z",
+      "manufacturer": 4,
+      "category": 1
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 11,
+    "fields": {
+      "name": "IdeaPad Slim 3",
+      "model": "15IAN8-82XB004KRA",
+      "price": "15499.00",
+      "tech_specifications": {
+        "CPU": "Intel Core i3-N305",
+        "RAM": "8GB LPDDR5",
+        "Storage": "256GB NVMe",
+        "GPU": "Intel UHD Graphics",
+        "Screen": "15.6\" FHD IPS"
+      },
+      "created_time": "2026-02-10T13:00:00Z",
+      "manufacturer": 2,
+      "category": 1
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 12,
+    "fields": {
+      "name": "TUF Gaming A15",
+      "model": "FA506NC-HN031",
+      "price": "29999.00",
+      "tech_specifications": {
+        "CPU": "AMD Ryzen 5 7535HS",
+        "RAM": "16GB DDR5",
+        "Storage": "512GB SSD",
+        "GPU": "NVIDIA RTX 3050 4GB",
+        "Screen": "15.6\" FHD 144Hz"
+      },
+      "created_time": "2026-02-10T14:00:00Z",
+      "manufacturer": 1,
+      "category": 1
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 13,
+    "fields": {
+      "name": "Redmi Note 13 Pro+",
+      "model": "MZB0F3REU",
+      "price": "16999.00",
+      "tech_specifications": {
+        "CPU": "MediaTek Dimensity 7200-Ultra",
+        "RAM": "12GB",
+        "Storage": "512GB",
+        "Camera": "200MP + 8MP + 2MP",
+        "Charging": "120W HyperCharge"
+      },
+      "created_time": "2026-02-11T09:00:00Z",
+      "manufacturer": 7,
+      "category": 2
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 14,
+    "fields": {
+      "name": "Galaxy A55 5G",
+      "model": "SM-A556BZECEUE",
+      "price": "18499.00",
+      "tech_specifications": {
+        "CPU": "Exynos 1480",
+        "RAM": "8GB",
+        "Storage": "256GB",
+        "Display": "6.6\" Super AMOLED 120Hz",
+        "Protection": "IP67"
+      },
+      "created_time": "2026-02-11T10:00:00Z",
+      "manufacturer": 3,
+      "category": 2
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 15,
+    "fields": {
+      "name": "iPhone 13",
+      "model": "MLPF3FS/A",
+      "price": "24999.00",
+      "tech_specifications": {
+        "CPU": "Apple A15 Bionic",
+        "RAM": "4GB",
+        "Storage": "128GB",
+        "Display": "6.1\" Super Retina XDR",
+        "Camera": "12MP + 12MP"
+      },
+      "created_time": "2026-02-11T11:00:00Z",
+      "manufacturer": 4,
+      "category": 2
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 16,
+    "fields": {
+      "name": "Poco F6 Pro",
+      "model": "MZB0G91EU",
+      "price": "22999.00",
+      "tech_specifications": {
+        "CPU": "Snapdragon 8 Gen 2",
+        "RAM": "12GB",
+        "Storage": "512GB",
+        "Display": "6.67\" WQHD+ Flow AMOLED",
+        "Battery": "5000 mAh"
+      },
+      "created_time": "2026-02-11T12:00:00Z",
+      "manufacturer": 7,
+      "category": 2
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 17,
+    "fields": {
+      "name": "OLED TV 55 C3",
+      "model": "OLED55C3RLA",
+      "price": "52999.00",
+      "tech_specifications": {
+        "Screen": "55\" OLED 4K EVO",
+        "Processor": "a9 AI Processor Gen6",
+        "Smart TV": "webOS 23",
+        "Gaming": "G-Sync & FreeSync"
+      },
+      "created_time": "2026-02-12T13:00:00Z",
+      "manufacturer": 8,
+      "category": 3
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 18,
+    "fields": {
+      "name": "QLED TV 43 Q60",
+      "model": "QE43Q60CAUXUA",
+      "price": "21499.00",
+      "tech_specifications": {
+        "Screen": "43\" QLED 4K",
+        "HDR": "Quantum HDR",
+        "Smart TV": "Tizen OS",
+        "Design": "AirSlim"
+      },
+      "created_time": "2026-02-12T14:00:00Z",
+      "manufacturer": 3,
+      "category": 3
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 19,
+    "fields": {
+      "name": "LED TV 50 NanoCell",
+      "model": "50NANO766QA",
+      "price": "17999.00",
+      "tech_specifications": {
+        "Screen": "50\" NanoCell 4K",
+        "OS": "webOS Smart TV",
+        "Sound": "AI Sound Pro",
+        "Backlight": "Direct LED"
+      },
+      "created_time": "2026-02-12T15:00:00Z",
+      "manufacturer": 8,
+      "category": 3
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 20,
+    "fields": {
+      "name": "4K TV A Pro 55",
+      "model": "ELA5485EU",
+      "price": "15999.00",
+      "tech_specifications": {
+        "Screen": "55\" LED 4K",
+        "OS": "Google TV",
+        "Audio": "Dolby Audio & DTS-X",
+        "Frame": "Metallic Bezel-less"
+      },
+      "created_time": "2026-02-12T16:00:00Z",
+      "manufacturer": 7,
+      "category": 3
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 21,
+    "fields": {
+      "name": "Xbox Series X",
+      "model": "RRT-00010",
+      "price": "21999.00",
+      "tech_specifications": {
+        "CPU": "8x Cores Custom Zen 2",
+        "GPU": "12 TFLOPS RDNA 2",
+        "Storage": "1TB Custom NVMe SSD",
+        "Performance": "True 4K Gaming / up to 120 FPS"
+      },
+      "created_time": "2026-02-13T10:00:00Z",
+      "manufacturer": 9,
+      "category": 4
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 22,
+    "fields": {
+      "name": "Nintendo Switch OLED",
+      "model": "HEG-S-KAAAA",
+      "price": "14299.00",
+      "tech_specifications": {
+        "Screen": "7\" OLED Display",
+        "Storage": "64GB",
+        "Modes": "TV, Tabletop, Handheld",
+        "Audio": "Enhanced onboard sound"
+      },
+      "created_time": "2026-02-13T11:00:00Z",
+      "manufacturer": 10,
+      "category": 4
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 23,
+    "fields": {
+      "name": "Xbox Series S",
+      "model": "RRS-00010",
+      "price": "13499.00",
+      "tech_specifications": {
+        "CPU": "8x Cores Custom Zen 2",
+        "GPU": "4 TFLOPS RDNA 2",
+        "Storage": "512GB NVMe SSD",
+        "Type": "Digital-only (No disc drive)"
+      },
+      "created_time": "2026-02-13T12:00:00Z",
+      "manufacturer": 9,
+      "category": 4
+    }
+  },
+  {
+    "model": "equipment_information.equipment",
+    "pk": 24,
+    "fields": {
+      "name": "PlayStation 5 Digital Edition",
+      "model": "CFI-2016B01",
+      "price": "19999.00",
+      "tech_specifications": {
+        "CPU": "AMD Zen 2 8-core",
+        "GPU": "AMD RDNA 2",
+        "Storage": "1TB Custom SSD",
+        "Type": "Digital-only"
+      },
+      "created_time": "2026-02-13T13:00:00Z",
+      "manufacturer": 5,
+      "category": 4
+    }
+  },
+  {
+    "model": "equipment_information.commentary",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "equipment_post": 1,
+      "content": "Чудовий ноутбук для роботи та ігор! Екран просто неймовірний, але під навантаженням трохи шумить.",
+      "created_time": "2026-03-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "equipment_information.commentary",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "equipment_post": 1,
+      "content": "Підкажіть, чи сильно гріється корпус біля клавіатури?",
+      "created_time": "2026-03-01T15:30:00Z"
+    }
+  },
+  {
+    "model": "equipment_information.commentary",
+    "pk": 3,
+    "fields": {
+      "user": 3,
+      "equipment_post": 2,
+      "content": "Топ за свої гроші. Охолодження тут краще, ніж у тонких моделях Asus. Рекомендую для рендерингу.",
+      "created_time": "2026-03-02T09:15:00Z"
+    }
+  },
+  {
+    "model": "equipment_information.commentary",
+    "pk": 4,
+    "fields": {
+      "user": 1,
+      "equipment_post": 4,
+      "content": "Камера просто космос, особливо зум. Але автономність хотілося б трохи кращу.",
+      "created_time": "2026-03-03T18:45:00Z"
+    }
+  },
+  {
+    "model": "equipment_information.commentary",
+    "pk": 5,
+    "fields": {
+      "user": 4,
+      "equipment_post": 5,
+      "content": "Титановий корпус відчується дуже преміально. Перейшла з 13 Про, різниця відчутна.",
+      "created_time": "2026-03-04T10:20:00Z"
+    }
+  },
+  {
+    "model": "equipment_information.commentary",
+    "pk": 6,
+    "fields": {
+      "user": 5,
+      "equipment_post": 7,
+      "content": "Найкраща покупка року! Slim версія займає набагато менше місця під телевізором.",
+      "created_time": "2026-03-05T21:00:00Z"
+    }
+  },
+  {
+    "model": "equipment_information.commentary",
+    "pk": 7,
+    "fields": {
+      "user": 2,
+      "equipment_post": 10,
+      "content": "Екран Liquid Retina XDR — це щось нереальне, очі взагалі не втомлюються за весь день роботи.",
+      "created_time": "2026-03-06T11:40:00Z"
+    }
+  },
+  {
+    "model": "equipment_information.commentary",
+    "pk": 8,
+    "fields": {
+      "user": 3,
+      "equipment_post": 13,
+      "content": "Зарядка 120W рятує, коли вимикають світло. Заряджається повністю за 20 хвилин.",
+      "created_time": "2026-03-06T14:15:00Z"
+    }
+  },
+  {
+    "model": "equipment_information.commentary",
+    "pk": 9,
+    "fields": {
+      "user": 4,
+      "equipment_post": 17,
+      "content": "Картинка на OLED-панелі вражає чорним кольором. Дивитися фільми ввечері — суцільне задоволення.",
+      "created_time": "2026-03-07T19:30:00Z"
+    }
+  },
+  {
+    "model": "equipment_information.commentary",
+    "pk": 10,
+    "fields": {
+      "user": 5,
+      "equipment_post": 22,
+      "content": "Для поїздок в потязі Switch OLED просто незамінний. Екран яскравий, батареї вистачає надовго.",
+      "created_time": "2026-03-08T09:05:00Z"
+    }
+  },
+  {
+    "model": "equipment_information.commentary",
+    "pk": 11,
+    "fields": {
+      "user": 1,
+      "equipment_post": 21,
+      "content": "Геймпад дуже зручний, а передплата Game Pass повністю закриває питання з іграми на кілька місяців вперед.",
+      "created_time": "2026-03-08T15:22:00Z"
+    }
+  }
+]

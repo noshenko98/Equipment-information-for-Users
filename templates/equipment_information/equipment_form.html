@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <section class="py-sm-7 py-5 position-relative">
+    <div class="container">
+      <h1>Create equipment</h1>
+      <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" class="btn btn-dark bg-gradient" value="Create">
+      </form>
+    </div>
+  </section>
+{% endblock %}
